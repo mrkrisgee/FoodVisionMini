@@ -9,12 +9,12 @@ import random
 import pathlib
 import shutil
 
-# Setup data paths
+# Setup data paths and splits
 data_dir = pathlib.Path("data")
 data_path = data_dir / "food-101" / "images"
+data_splits = ["train", "test"]
 
 def get_subset(image_path=data_path,
-               data_splits=["train", "test"], 
                target_classes=["pizza", "steak", "sushi"],
                amount=0.2, # Change amount of data to get (e.g. 0.1 = random 10%, 0.2 = random 20%)
                seed=42):
@@ -57,14 +57,14 @@ def get_subset(image_path=data_path,
     if not path_check_bool:
         # Get labels
         for data_split in data_splits:
-            print(f"[INFO] Creating image split for: {data_split}...")
+            print(f"\n Creating image split for: {data_split}...")
             label_path = data_dir / "food-101" / "meta" / f"{data_split}.txt"
             with open(label_path, "r") as f:
                 labels = [line.strip("\n") for line in f.readlines() if line.split("/")[0] in target_classes]
 
             # Get random subset of target classes image ID's
             number_to_sample = round(amount * len(labels))
-            print(f"[INFO] Getting random subset of {number_to_sample} images for {data_split}...")
+            print(f" Getting random subset of {number_to_sample} images for {data_split}...")
             sampled_images = random.sample(labels, k=number_to_sample)
             
             # Apply full paths
@@ -77,15 +77,22 @@ def get_subset(image_path=data_path,
 
         # Create the target directory
         target_dir.mkdir(parents=True, exist_ok=True)
-        print(f"Creating directory: '{target_dir_name}'")
+        print(f"\n Creating directory: '{target_dir_name}'")
 
         # Copy to dedicated directories
         for image_split in label_splits.keys():
             for image_path in label_splits[str(image_split)]:
-                dest_dir = target_dir / image_split / image_path.parent.stem / image_path.name #
+                dest_dir = target_dir / image_split / image_path.parent.stem / image_path.name
                 if not dest_dir.parent.is_dir():
                     dest_dir.parent.mkdir(parents=True, exist_ok=True)
-                # print(f"[INFO] Copying {image_path} to {dest_dir}...")
                 shutil.copy2(image_path, dest_dir)
     else:
-        print(f"[INFO] Subset already exists in {target_dir_name}. Skipping...")
+        print(f"\n Subset already exists in {target_dir_name}. Skipping...")
+
+    # Save trainining and testing directory paths
+    train_dir = target_dir_name / "train"
+    test_dir = target_dir_name / "test"
+
+    return train_dir, test_dir
+
+    
