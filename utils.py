@@ -1,7 +1,7 @@
 """
 Contains various utility functions for PyTorch.
 Setting up DataLoaders for image classification data,
-model training and saving.
+setting global seeds, model training and saving.
 """
 import os
 
@@ -63,3 +63,13 @@ def create_dataloaders(train_dir: str,
         )
 
     return train_dataloader, test_dataloader, class_names
+
+def set_seeds(seed: int=42):
+    """Sets random sets for torch operations.
+
+    Args: seed(int, optional): Random seed to set. Defaults to 42.
+    """
+    # Set the seed for general torch operations
+    torch.manual_seed(seed)
+    # Set the seed for CUDA torch operations (ones that happen on the GPU)
+    torch.cuda.manual_seed(seed)
