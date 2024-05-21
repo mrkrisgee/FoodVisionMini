@@ -1,9 +1,11 @@
 """
 Contains various utility functions for PyTorch.
 Setting up DataLoaders for image classification data,
-setting global seeds, model training and saving.
+setting global seeds, device-agnostic code,
+model training and saving.
 """
 import os
+import torch
 
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
@@ -73,3 +75,16 @@ def set_seeds(seed: int=42):
     torch.manual_seed(seed)
     # Set the seed for CUDA torch operations (ones that happen on the GPU)
     torch.cuda.manual_seed(seed)
+
+def set_device(device: str="cuda"):
+    """
+    Sets up device agnostic code.
+    
+    Ensures data is calculated on the same device.
+
+    The code will use the GPU when there is one available,
+    otherwise it will fallback on the CPU.
+    """
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Device being used: {device}")
+    return device
