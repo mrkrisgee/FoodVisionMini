@@ -27,48 +27,43 @@ class TinyVGG(nn.Module):
         super().__init__()
         self.conv_block_1 = nn.Sequential(
             nn.Conv2d(in_channels=input_shape,
-                out_channels=output_shape,
-                kernel_size=3,
-                stride=1,
-                padding=0),
+                    out_channels=hidden_units,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1),
             nn.ReLU(),
-            nn.Conv2d(in_channels=input_shape,
-                out_channels=output_shape,
-                kernel_size=3,
-                stride=1,
-                padding=0),
+            nn.Conv2d(in_channels=hidden_units,
+                    out_channels=hidden_units,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2,
-                stride=2)
+                    stride=2)
         )
         self.conv_block_2 = nn.Sequential(
-            nn.Conv2d(in_channels=input_shape,
-                out_channels=output_shape,
-                kernel_size=3,
-                stride=1,
-                padding=0),
+            nn.Conv2d(in_channels=hidden_units,
+                    out_channels=hidden_units,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1),
             nn.ReLU(),
-            nn.Conv2d(in_channels=input_shape,
-                out_channels=output_shape,
-                kernel_size=3,
-                stride=1,
-                padding=0),
+            nn.Conv2d(in_channels=hidden_units,
+                    out_channels=hidden_units,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2,
-                stride=2)
+            stride=2)
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(in_features=hidden_units*13*13,
-            out_features=output_shape)
+            nn.Linear(in_features=hidden_units * 56 * 56, out_features=output_shape)  # Adjusting for the size after two max pools
         )
 
     def forward(self, x: torch.Tensor):
-        return self.classifier(self.block_2(self.block_1(x)))
-
-    # x.name = "TinyVGG"
-    # print(f"\n[INFO] Created new {model.name} model.")
-    # return x
+        return self.classifier(self.conv_block_2(self.conv_block_1(x)))
 
 def create_effnetb0(OUT_FEATURES: int):
     """
@@ -99,7 +94,7 @@ def create_effnetb0(OUT_FEATURES: int):
     print(f"\n[INFO] Created new {model.name} model.")
     return model
 
-def create_effnet_b2(OUT_FEATURES: int):
+def create_effnetb2(OUT_FEATURES: int):
     """
     efficientnet_b2 architecture - base model
     See the original architecture here:
@@ -149,7 +144,7 @@ def create_effnetv2_s(OUT_FEATURES: int):
     # 4. Change the classifier head
     model.classifier = nn.Sequential(
         nn.Dropout(p=dropout, inplace=True),
-        nn.Linear(in_features=1408, out_features=OUT_FEATURES)
+        nn.Linear(in_features=1280, out_features=OUT_FEATURES)
     ).to(device)
 
     # 5. Give the model a name
