@@ -3,6 +3,7 @@ import torchvision
 import pathlib
 import utils
 import model_builder
+import engine
 
 from torch import nn
 from torchvision import transforms
@@ -111,4 +112,9 @@ OUT_FEATURES = len(class_names)
 # ) 
 
 ## TRAIN MODEL
+# Define loss function and optimizer
+loss_fn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+
 
