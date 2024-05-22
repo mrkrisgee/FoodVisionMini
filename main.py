@@ -12,7 +12,7 @@ from timeit import default_timer as timer
 
 from subset_gen import get_subset
 
-def main():
+def main(fetch_attr: bool=False):
     # Get torchininfo. Install if it doesn't exist
     try:
         from torchinfo import summary
@@ -89,14 +89,16 @@ def main():
     ## Setup the model
     # Get number of output channels (one for each class)
     OUT_FEATURES = len(class_names)
-    return OUT_FEATURES
+    if fetch_attr:
+        return OUT_FEATURES
 
     ## Init experiment parameters 
     # 1.  A list of the number of epochs we'd like to test
-    num_epochs = [2]
+    num_epochs = [10]
 
     # 2. Create models list (new model needed for each experiment) - A list of the models we'd like to test
-    models = ["effnetb0"]
+    # models = ["tinyvgg", "effnetb0", "effnetb2", "effnetv2_s", "resnet101"]
+    models = ["tinyvgg", "effnetb2", "effnetv2_s", "resnet101"]
 
     # 3. Create dataloaders dictionary- A dictionary of the different training DataLoaders (if any)
     train_dataloaders ={"data": train_dataloader}

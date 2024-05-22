@@ -210,7 +210,3 @@ def train(model: torch.nn.Module,
 
     # Return the results diction at the end of the epochs
     return results
-
-
-
-

@@ -175,6 +175,7 @@ def delete_unnecessary_files():
         # Check if the item is a directory and if itsnname is not the target name
         if os.path.isdir(item_path) and item != timestamp:
             shutil.rmtree(item_path)
-            print(f" Unecessary folder deleted: {item_path}")
+            # print(f" Unecessary folder deleted: {item_path}")
 
-    print(f"\n Operation complete.")
+    # print(f"\nOperation complete.")
+    print(f"Unecessary folders deleted.")

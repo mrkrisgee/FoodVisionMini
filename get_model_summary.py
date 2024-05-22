@@ -41,10 +41,10 @@ def get_model_summary(model: torch.nn.Module):
         https://pytorch.org/vision/main/models/generated/torchvision.models.resnet101.html#resnet101
 
     Example use:
-    et_model_summary("effnetb0")
+    get_model_summary("effnetb0")
 
     """
-    OUT_FEATURES = main.main()
+    OUT_FEATURES = main.main(fetch_attr=True)
 
     # Set up device agnostic code.
     device = utils.set_device()

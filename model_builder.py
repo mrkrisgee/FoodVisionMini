@@ -9,8 +9,6 @@ import torchvision.models as models
 from torch import nn
 from utils import set_seeds, set_device
 
-device = set_device()
-
 class TinyVGG(nn.Module):
     """
     Creates the TinyVGG architecture.
@@ -23,6 +21,8 @@ class TinyVGG(nn.Module):
     hidden_units: An integer indicating number of hidden units between layers.
     output_shape: An integer indicating number of output units.
     """
+    device = set_device()
+
     def __init__(self, hidden_units: int, output_shape: int,  input_shape: int=3) -> None:
         super().__init__()
         self.conv_block_1 = nn.Sequential(
@@ -169,7 +169,8 @@ def create_resnet101(OUT_FEATURES: int):
     set_seeds()
 
     # 4. Change the fc head
-    model.fc = nn.Linear(in_features=2048, out_features=OUT_FEATURES).to(device)
+    model.fc = nn.Linear(in_features=2048, out_features=OUT_FEATURES
+    ).to(device)
 
     # 5. Give the model a name
     model.name = "resnet101"
