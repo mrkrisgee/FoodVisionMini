@@ -14,7 +14,7 @@ from torch.utils.tensorboard import SummaryWriter
 from pathlib import Path
 
 
-NUM_WORKERS = os.cpu_count()
+NUM_WORKERS = int(os.cpu_count()/2)
 
 def create_dataloaders(train_dir: str,
                         test_dir: str,
