@@ -7,9 +7,11 @@ saving trained models.
 import os
 import torch
 
+
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
+from pathlib import Path
 
 NUM_WORKERS = os.cpu_count()
 
@@ -92,7 +94,7 @@ def set_device(device: str="cuda"):
 
 def save_model(model: torch.nn.Module,
                target_dir: str,
-               model_nme: str):
+               model_name: str):
     """
     Saves a PyTorch model to a target directory.
 

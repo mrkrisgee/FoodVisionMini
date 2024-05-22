@@ -118,7 +118,7 @@ def main():
 
     ## Init experiment parameters 
     # 1.  A list of the number of epochs we'd like to test
-    num_epochs = [5]
+    num_epochs = [2]
 
     # 2. Create models list (new model needed for each experiment) - A list of the models we'd like to test
     models = ["effnetb0"]
@@ -176,7 +176,7 @@ def main():
                             test_dataloader=test_dataloader,
                             optimizer=optimizer,
                             loss_fn=loss_fn,
-                            epochs=5,
+                            epochs=epochs,
                             device=device,
                             writer=utils.create_writer(experiment_name=dataloader_name,
                                                 model_name=model_name,
@@ -184,13 +184,13 @@ def main():
 
                 # End the timer
                 end_time = timer()
-                print(f"Total training time: {end_time-start_time:.3f} seconds")
+                print(f"\nTotal training time: {end_time-start_time:.3f} seconds")
                 
                 # 10. Save the model to file
-                save_file_path = f"This is my first test_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
-                save_model(model=effnetb0,
-                        target_dir="models",
-                        model_name=save_filepath)
+                save_filepath = f"This is my first test_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
+                utils.save_model(model=model,
+                                target_dir="models",
+                                model_name=save_filepath)
                 print("-"*50 + "\n")
 
 if __name__ == '__main__':
