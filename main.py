@@ -97,7 +97,7 @@ def main():
     # print(f"\n[INFO] Created new {tiny_vgg.name} model.")
 
     ## Effnetb0 Model
-    effnetb0 = model_builder.create_effnetb0(OUT_FEATURES)
+    # effnetb0 = model_builder.create_effnetb0(OUT_FEATURES)
 
     ##Effnetb2 Model
     # effnetb2 = model_builder.create_effnetb2(OUT_FEATURES)
@@ -128,7 +128,7 @@ def main():
 
     ## Init experiment iterations
     # 1. Set random seeds
-    set_seeds()
+    utils.set_seeds()
 
     # 2. Keep track of experiment numbers
     experiment_number = 0
@@ -155,24 +155,24 @@ def main():
                     model.name = "TinyVGG"
                     print(f"\n[INFO] Created new {model.name} model.")
                 elif model_name == "effnetb0":
-                    model = create_effnetb0(OUT_FEATURES)
+                    model = model_builder.create_effnetb0(OUT_FEATURES)
                 elif model_name == "effnetb2":
-                    model = create_effnetb2(OUT_FEATURES)
+                    model = model_builder.create_effnetb2(OUT_FEATURES)
                 elif model_name == "effnetv2_s":
-                    model = create_effnetv2_s(OUT_FEATURES)
+                    model = model_builder.create_effnetv2_s(OUT_FEATURES)
                 elif model_name == "resnet101":
-                    model = create_resnet101(OUT_FEATURES)
+                    model = model_builder.create_resnet101(OUT_FEATURES)
 
                 # 8. Define loss function and optimizer
                 loss_fn = nn.CrossEntropyLoss()
-                optimizer = torch.optim.Adam(effnetb0.parameters(), lr=0.001)
+                optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
                 # Start the timer
                 start_time = timer()
 
                 # 9. Train target model and track experiments
                 engine.train(model=model,
-                            train_dataloader=train,
+                            train_dataloader=train_dataloader,
                             test_dataloader=test_dataloader,
                             optimizer=optimizer,
                             loss_fn=loss_fn,
@@ -187,7 +187,7 @@ def main():
                 print(f"Total training time: {end_time-start_time:.3f} seconds")
                 
                 # 10. Save the model to file
-                save_file_path = f"This is my first test. model_name is {model_name}_{dataloader_name}_{epochs}_epochs.pth"
+                save_file_path = f"This is my first test_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
                 save_model(model=effnetb0,
                         target_dir="models",
                         model_name=save_filepath)
