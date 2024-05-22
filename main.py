@@ -12,7 +12,6 @@ from timeit import default_timer as timer
 
 from subset_gen import get_subset
 
-
 def main():
     # Get torchininfo. Install if it doesn't exist
     try:
