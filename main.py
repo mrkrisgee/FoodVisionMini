@@ -8,8 +8,10 @@ import engine
 from torch import nn
 from torchvision import transforms
 from torch.utils.tensorboard import SummaryWriter
+from timeit import default_timer as timer
 
 from subset_gen import get_subset
+
 
 def main():
     # Get torchininfo. Install if it doesn't exist
@@ -114,30 +116,82 @@ def main():
     #         row_settings=["var_names"]
     # ) 
 
-    ## TRAIN MODEL
-    # Define loss function and optimizer
-    loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(effnetb0.parameters(), lr=0.001)
+    ## Init experiment parameters 
+    # 1.  A list of the number of epochs we'd like to test
+    num_epochs = [5]
 
-    results = engine.train(model=effnetb0,
-                    train_dataloader=train_dataloader,
-                    test_dataloader=test_dataloader,
-                    optimizer=optimizer,
-                    loss_fn=loss_fn,
-                    epochs=5,
-                    device=device,
-                    writer=create_writer(experiment_name=dataloader_name,
-                                         model_name=model_name,
-                                         extra=f"{epochs}_epochs"))
+    # 2. Create models list (new model needed for each experiment) - A list of the models we'd like to test
+    models = ["effnetb0"]
 
-    # print(results)
+    # 3. Create dataloaders dictionary- A dictionary of the different training DataLoaders (if any)
+    train_dataloaders ={"data": train_dataloader}
 
-    # Save the model to file so we can get back the best model
-    save_file_path = f"This is my first test. model_name is {model_name}_{dataloader_name}_{epochs}_epochs.pth"
-    save_model(model=effnetb0,
-               target_dir="models",
-               model_name=save_filepath)
-    print("-"*50 + "\n")
+    ## Init experiment iterations
+    # 1. Set random seeds
+    set_seeds()
+
+    # 2. Keep track of experiment numbers
+    experiment_number = 0
+
+    # 3. Loop through each DataLoader
+    for dataloader_name, train_dataloader in train_dataloaders.items():
+
+        # 4. Loop through each number of epochs
+        for epochs in num_epochs:
+
+            # 5. Loop through each model name and create a new model based on the name
+            for model_name in models:
+
+                # 6. Information print out
+                experiment_number += 1
+                print(f"[INFO] Experiment number: {experiment_number}")
+                print(f"[INFO] Model: {model_name}")
+                print(f"[INFO] DataLoader: {dataloader_name}")
+                print(f"[INFO] Number of epochs: {epochs}")  
+
+                # 7. Select the model
+                if model_name == "tinyvgg":
+                    model = model_builder.TinyVGG(hidden_units=10, output_shape=OUT_FEATURES).to(device)
+                    model.name = "TinyVGG"
+                    print(f"\n[INFO] Created new {model.name} model.")
+                elif model_name == "effnetb0":
+                    model = create_effnetb0(OUT_FEATURES)
+                elif model_name == "effnetb2":
+                    model = create_effnetb2(OUT_FEATURES)
+                elif model_name == "effnetv2_s":
+                    model = create_effnetv2_s(OUT_FEATURES)
+                elif model_name == "resnet101":
+                    model = create_resnet101(OUT_FEATURES)
+
+                # 8. Define loss function and optimizer
+                loss_fn = nn.CrossEntropyLoss()
+                optimizer = torch.optim.Adam(effnetb0.parameters(), lr=0.001)
+
+                # Start the timer
+                start_time = timer()
+
+                # 9. Train target model and track experiments
+                engine.train(model=model,
+                            train_dataloader=train,
+                            test_dataloader=test_dataloader,
+                            optimizer=optimizer,
+                            loss_fn=loss_fn,
+                            epochs=5,
+                            device=device,
+                            writer=utils.create_writer(experiment_name=dataloader_name,
+                                                model_name=model_name,
+                                                extra=f"{epochs}_epochs"))
+
+                # End the timer
+                end_time = timer()
+                print(f"Total training time: {end_time-start_time:.3f} seconds")
+                
+                # 10. Save the model to file
+                save_file_path = f"This is my first test. model_name is {model_name}_{dataloader_name}_{epochs}_epochs.pth"
+                save_model(model=effnetb0,
+                        target_dir="models",
+                        model_name=save_filepath)
+                print("-"*50 + "\n")
 
 if __name__ == '__main__':
     import multiprocessing
