@@ -90,31 +90,7 @@ def main():
     ## Setup the model
     # Get number of output channels (one for each class)
     OUT_FEATURES = len(class_names)
-
-    ## TinyVGG Model
-    # tiny_vgg = model_builder.TinyVGG(hidden_units=10, output_shape=OUT_FEATURES).to(device)
-    # tiny_vgg.name = "TinyVGG"
-    # print(f"\n[INFO] Created new {tiny_vgg.name} model.")
-
-    ## Effnetb0 Model
-    # effnetb0 = model_builder.create_effnetb0(OUT_FEATURES)
-
-    ##Effnetb2 Model
-    # effnetb2 = model_builder.create_effnetb2(OUT_FEATURES)
-
-    ## Effnetv2_s Model
-    # effnetv2_s = model_builder.create_effnetv2_s(OUT_FEATURES)
-
-    ## ResNet101 Model
-    # resnet101 = model_builder.create_resnet101(OUT_FEATURES)
-
-    # 2. Get a summary of Models from torchvision.models (uncomment for full output)
-    # summary(model=resnet101, 
-    #         input_size=(32, 3, 224, 224), # make sure this is "input_size", not "input_shape"
-    #         col_names=["input_size", "output_size", "num_params", "trainable"],
-    #         col_width=20,
-    #         row_settings=["var_names"]
-    # ) 
+    return OUT_FEATURES
 
     ## Init experiment parameters 
     # 1.  A list of the number of epochs we'd like to test

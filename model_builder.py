@@ -125,7 +125,7 @@ def create_effnetb2(OUT_FEATURES: int):
 
 def create_effnetv2_s(OUT_FEATURES: int):
     """
-    efficientnet_b2 architecture - base model
+    efficientnet_v2_s architecture - base model
     See the original architecture here:
     https://pytorch.org/vision/main/models/generated/torchvision.models.efficientnet_v2_s.html
     """
@@ -175,7 +175,4 @@ def create_resnet101(OUT_FEATURES: int):
     model.name = "resnet101"
     print(f"\n[INFO] Creating {model.name} feature extractor model...")
     return model    
-
-    ####### Maybe add a vision transformer? Apparently one of the most common ones
-    # https://www.learnpytorch.io/06_pytorch_transfer_learning/#3-getting-a-pretrained-model
 
