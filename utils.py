@@ -86,7 +86,7 @@ def set_device(device: str="cuda"):
     otherwise it will fallback on the CPU.
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Device being used: {device}")
+    # print(f"Device being used: {device}")
     return device
 
 def save_model(model: torch.nn.Module,
