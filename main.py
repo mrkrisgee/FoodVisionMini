@@ -167,10 +167,15 @@ def main():
                 loss_fn = nn.CrossEntropyLoss()
                 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
+                # 9. Create a writer
+                writer = utils.create_writer(experiment_name=dataloader_name,
+                                           model_name=model_name,
+                                           extra=f"{epochs}_epochs")
+
                 # Start the timer
                 start_time = timer()
 
-                # 9. Train target model and track experiments
+                # 10. Train target model and track experiments
                 engine.train(model=model,
                             train_dataloader=train_dataloader,
                             test_dataloader=test_dataloader,
@@ -178,20 +183,21 @@ def main():
                             loss_fn=loss_fn,
                             epochs=epochs,
                             device=device,
-                            writer=utils.create_writer(experiment_name=dataloader_name,
-                                                model_name=model_name,
-                                                extra=f"{epochs}_epochs"))
+                            writer=writer)
 
                 # End the timer
                 end_time = timer()
                 print(f"\nTotal training time: {end_time-start_time:.3f} seconds")
                 
-                # 10. Save the model to file
+                # 11. Save the model to file
                 save_filepath = f"This is my first test_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
                 utils.save_model(model=model,
                                 target_dir="models",
                                 model_name=save_filepath)
                 print("-"*50 + "\n")
+
+                # 12. Clean up unnecessary_files
+                utils.delete_unnecessary_files()
 
 if __name__ == '__main__':
     import multiprocessing

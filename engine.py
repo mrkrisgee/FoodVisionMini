@@ -165,6 +165,9 @@ def train(model: torch.nn.Module,
                "train_acc": [],
                "test_loss": [],
                "test_acc": []}
+
+    # Track the PyTorch model architecture
+    writer.add_graph(model=model, input_to_model=torch.randn(32, 3, 224, 224).to(device)) # Pass in an example input
     
     # Loop through training and testing steps for a number of epochs
     for epoch in tqdm(range(epochs)):
@@ -199,9 +202,8 @@ def train(model: torch.nn.Module,
                                             "test_loss": test_loss},
                            global_step=epoch)
 
-        # Track the PyTorch model architecture
-        writer.add_graph(model=model,
-                         input_to_model=torch.randn(32, 3, 224, 224).to(device)) # Pass in an example input
+        # # Track the PyTorch model architecture
+        writer.add_graph(model=model, input_to_model=torch.randn(32, 3, 224, 224).to(device)) # Pass in an example input
     
     # Close the writer
     writer.close()

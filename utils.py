@@ -7,11 +7,12 @@ saving trained models.
 import os
 import torch
 
-
+from datetime import datetime
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from pathlib import Path
+
 
 NUM_WORKERS = os.cpu_count()
 
@@ -146,9 +147,6 @@ def create_writer(experiment_name: str,
         # The above is the same as:
         writer = SummaryWriter(log_dir="runs/2022-06-04/data_10_percent/effnetb2/5_epochs/")
     """
-    from datetime import datetime
-    import os
-
     # Get timestamp of current date (all experiments on certain day live in same folder)
     timestamp = datetime.now().strftime("%Y-%m-%d") # returns current date in YYYY-MM-DD format
 
@@ -157,6 +155,26 @@ def create_writer(experiment_name: str,
         log_dir = os.path.join("runs", timestamp, experiment_name, model_name, extra)
     else:
         log_dir = os.path.join("runs", timestamp, experiment_name, model_name)
-        
+
     print(f"[INFO] Created SummaryWriter, saving to: {log_dir}...")
     return SummaryWriter(log_dir=log_dir)
+
+def delete_unnecessary_files():
+    """
+    Removes any extra sub-directories that
+    Tensorboard creates by default.
+    """
+    import shutil
+    # Get timestamp of current date (all experiments on certain day live in same folder)
+    timestamp = datetime.now().strftime("%Y-%m-%d") # returns current date in YYYY-MM-DD format
+
+    parent = "runs"
+
+    for item in os.listdir(parent):
+        item_path = os.path.join(parent, item)
+        # Check if the item is a directory and if itsnname is not the target name
+        if os.path.isdir(item_path) and item != timestamp:
+            shutil.rmtree(item_path)
+            print(f" Unecessary folder deleted: {item_path}")
+
+    print(f"\n Operation complete.")
