@@ -125,9 +125,19 @@ def main():
                     optimizer=optimizer,
                     loss_fn=loss_fn,
                     epochs=5,
-                    device=device)
+                    device=device,
+                    writer=create_writer(experiment_name=dataloader_name,
+                                         model_name=model_name,
+                                         extra=f"{epochs}_epochs"))
 
-    print(results)
+    # print(results)
+
+    # Save the model to file so we can get back the best model
+    save_file_path = f"This is my first test. model_name is {model_name}_{dataloader_name}_{epochs}_epochs.pth"
+    save_model(model=effnetb0,
+               target_dir="models",
+               model_name=save_filepath)
+    print("-"*50 + "\n")
 
 if __name__ == '__main__':
     import multiprocessing
