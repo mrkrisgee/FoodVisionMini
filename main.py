@@ -18,7 +18,13 @@ def main(fetch_attr: bool=False):
         from torchinfo import summary
     except:
         print("[INFO] Couldn't find torchinfo... installing it.")
-        from torchinfo import summary
+        try:
+            import subprocess
+            subprocess.run(["conda", "install", "-y", "-c", "conda-forge", "torchinfo"], check=True)
+            print("[INFO] torchinfo has been successfully installed.")
+            from torchinfo import summary
+        except Exception as e:
+            print(f"[ERROR] An error occurred while installing torchinfo: {e}")
 
     # Setup device agnostic code
     device = utils.set_device()
