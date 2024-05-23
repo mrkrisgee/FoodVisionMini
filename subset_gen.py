@@ -2,7 +2,7 @@
 Contains functionality for generating data subsets from 
 larger datasets.
 
-Originally ourced from github.com/mrdbourke -
+Originally sourced from github.com/mrdbourke -
 [https://github.com/mrdbourke/pytorch-deep-learning/blob/main/extras/04_custom_data_creation.ipynb]
 """
 import random

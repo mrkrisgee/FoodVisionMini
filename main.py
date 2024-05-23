@@ -86,12 +86,11 @@ def main(fetch_attr: bool=False):
                                                                               transform=transform,
                                                                               batch_size=32)
 
-    ## Setup the model
     # Get number of output channels (one for each class)
     OUT_FEATURES = len(class_names)
     if fetch_attr:
         return OUT_FEATURES
-
+        
     ## Init experiment parameters 
     # 1.  A list of the number of epochs we'd like to test
     num_epochs = [10]
