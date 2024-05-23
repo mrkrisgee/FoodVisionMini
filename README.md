@@ -18,8 +18,8 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
    - Obtain the original dataset.
      
 2. **Create a Smaller Subset**:
-   - Generate a smaller dataset from the original, consisting of 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes.
-   - Split this subset into training and testing data to optimize training speed.
+   - Generate a smaller dataset from the original, consisting of 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes to optimize training speed.
+   - Split this subset into training and testing data.
   
 ### Preprocessing and Data Augmentation
 
