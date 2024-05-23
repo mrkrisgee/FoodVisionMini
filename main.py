@@ -171,7 +171,7 @@ def main(fetch_attr: bool=False):
                 print(f"\nTotal training time: {end_time-start_time:.3f} seconds")
                 
                 # 11. Save the model to file
-                save_filepath = f"This is my first test_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
+                save_filepath = f"FoodVisionMini_{model_name}_{dataloader_name}_{epochs}_epochs.pth"
                 utils.save_model(model=model,
                                 target_dir="models",
                                 model_name=save_filepath)

@@ -52,20 +52,18 @@ def create_dataloaders(train_dir: str,
     class_names = train_data.classes
 
     # Turn images into DataLoaders
-    train_dataloader= DataLoader(
-        train_data,
-        batch_size = batch_size,
-        shuffle = True,
-        num_workers = num_workers,
-        pin_memory = True        
+    train_dataloader= DataLoader(train_data,
+                                batch_size = batch_size,
+                                shuffle = True,
+                                num_workers = num_workers,
+                                pin_memory = True        
         )
 
-    test_dataloader= DataLoader(
-        test_data,
-        batch_size = batch_size,
-        shuffle = False,
-        num_workers = num_workers,
-        pin_memory = True        
+    test_dataloader= DataLoader(test_data,
+                                batch_size = batch_size,
+                                shuffle = False,
+                                num_workers = num_workers,
+                                pin_memory = True        
         )
 
     return train_dataloader, test_dataloader, class_names
