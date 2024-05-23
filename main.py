@@ -56,14 +56,14 @@ def main(fetch_attr: bool=False):
 
     # Download and transform Food101 data - [SOURCE: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/]
     train_data = torchvision.datasets.Food101(root=data_dir,
-                                                split="train",
-                                                transform=transform,
-                                                download=download)
+                                              split="train",
+                                              transform=transform,
+                                              download=download)
 
     test_data = torchvision.datasets.Food101(root=data_dir,
-                                                split="test",
-                                                transform=transform,
-                                                download=download)
+                                             split="test",
+                                             transform=transform,
+                                             download=download)
 
     # Remove the original archive file if downloaded
     if download:
@@ -77,14 +77,14 @@ def main(fetch_attr: bool=False):
     ## Create smaller datasets and copy to subset directories - 20% of data
     print(f"\n[INFO] Creating data subsets")
     train_dir, test_dir = get_subset(target_classes=["tacos", "waffles", "sushi"],
-                            amount=0.2)
+                                     amount=0.2)
 
     ## Create Datasets and DataLoaders
     print(f"\n[INFO] Creating Datasets and DataLoaders")
     train_dataloader, test_dataloader, class_names = utils.create_dataloaders(train_dir=train_dir,
-                                                                            test_dir=test_dir,
-                                                                            transform=transform,
-                                                                            batch_size=32)
+                                                                              test_dir=test_dir,
+                                                                              transform=transform,
+                                                                              batch_size=32)
 
     ## Setup the model
     # Get number of output channels (one for each class)
@@ -97,7 +97,6 @@ def main(fetch_attr: bool=False):
     num_epochs = [10]
 
     # 2. Create models list (new model needed for each experiment) - A list of the models we'd like to test
-    # models = ["tinyvgg", "effnetb0", "effnetb2", "effnetv2_s", "resnet101"]
     models = ["tinyvgg", "effnetb2", "effnetv2_s", "resnet101"]
 
     # 3. Create dataloaders dictionary- A dictionary of the different training DataLoaders (if any)
