@@ -102,7 +102,7 @@ def main(fetch_attr: bool=False):
     num_epochs = [10]
 
     # 2. Create models list (new model needed for each experiment) - A list of the models we'd like to test
-    models = ["tinyvgg", "effnetb2", "effnetv2_s", "resnet101"]
+    models = ["tinyvgg", "effnetb0", "effnetb2", "effnetv2_s", "resnet101"]
 
     # 3. Create dataloaders dictionary- A dictionary of the different training DataLoaders (if any)
     train_dataloaders ={"data": train_dataloader}
