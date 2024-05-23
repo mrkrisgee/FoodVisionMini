@@ -4,7 +4,7 @@ FoodVisionMini is a series of experiments aimed at gaining a deeper understandin
 
 ## Dataset Description
 
-The Food101 dataset consists of 101,000 images of food divided into 101 categories, with 1,000 images per category. For this experiment, a subset containing 20% of the images from the tacos, waffles, and sushi classes was used to optimize training time and computational resources.
+The Food101 dataset consists of 101,000 images of food divided into 101 categories, with 1,000 images per category. For this experiment, a subset containing 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes was used to optimize training time and computational resources.
 
 ## Technical Background
 
