@@ -4,7 +4,7 @@ FoodVisionMini is a series of experiments aimed at gaining a deeper understandin
 
 ## Dataset Description
 
-The Food101 dataset consists of 101,000 images of food divided into 101 categories, with 1,000 images per category. For this experiment, a subset containing 20% of the images from the tacos, waffles, and sushi classes was used to optimize training time and computational resources.
+The Food101 dataset consists of 101,000 images of food divided into 101 categories, with 1,000 images per category. For this experiment, a subset containing 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes was used to optimize training time and computational resources.
 
 ## Technical Background
 
@@ -18,8 +18,8 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
    - Obtain the original dataset.
      
 2. **Create a Smaller Subset**:
-   - Generate a smaller dataset from the original, consisting of 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes.
-   - Split this subset into training and testing data to optimize training speed.
+   - Generate a smaller dataset from the original, consisting of 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes to optimize training speed.
+   - Split this subset into training and testing data.
   
 ### Preprocessing and Data Augmentation
 
