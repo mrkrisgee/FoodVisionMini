@@ -76,7 +76,7 @@ By examining the curves, we can conclude that the TinyVGG model is overfitting, 
 
 The results of these experiments can be examined in the [`results`](https://github.com/mrkrisgee/FoodVisionMini/tree/main/results) directory.
 
-### Usage
+## Usage
 
 To run your own FoodVisionMini experiments, you can clone the FoodVisionMini repository:
 
