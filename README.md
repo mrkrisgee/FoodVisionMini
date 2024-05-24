@@ -24,6 +24,7 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
 ### Preprocessing and Data Augmentation
 
 1. **Prepare DataLoaders:**
+   
    - Implement Train and Test DataLoaders to manage large datasets in batches.
    - Apply data augmentation techniques such as resizing and shuffling to increase the diversity of the training data.
    - Normalize the image data to standardize the input.
@@ -31,6 +32,7 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
 ### Model Training
 
 1. **Set Up Experiment Iterations:**
+   
    - Configure the model architectures with pre-defined and adjusted classifier heads to align with our experimental requirements.
    - Instantiate training models.
    - Define loss functions and optimizers.
