@@ -17,7 +17,7 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
 1. **Download the *[Food101 Image Data Set](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)*.**
    - Obtain the original dataset.
      
-2. **Create a Smaller Subset**:
+3. **Create a Smaller Subset**:
    - Generate a smaller dataset from the original, consisting of 20% of the images from the <ins>tacos</ins>, <ins>waffles</ins>, and <ins>sushi</ins> classes to optimize training speed.
    - Split this subset into training and testing data.
   
