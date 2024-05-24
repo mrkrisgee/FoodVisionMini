@@ -75,6 +75,26 @@ By examining the curves, we can conclude that the TinyVGG model is overfitting, 
 
 The results of these experiments can be examined in the [`results`](https://github.com/mrkrisgee/FoodVisionMini/tree/main/results) directory.
 
+### Usage
+
+To run your own FoodVisionMini experiments, you can clone the FoodVisionMini repository:
+
+1. Clone the FoodVisionMini repository:
+```bash
+git clone https://github.com/your-username/FoodVisionMini.git
+```
+
+2. navigate to the repository directory:
+
+```bash
+cd FoodVisionMini
+```
+
+3. and with CUDA enabled run the main.py script
+```bash
+python main.py
+```
+
 ## References
 
 - [The CNN Explainer](https://www.cnnexplainer.com)
