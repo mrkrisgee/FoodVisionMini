@@ -31,6 +31,7 @@ Convolutional Neural Networks (CNNs) are a class of deep learning models particu
 ### Model Training
 
 1. **Set Up Experiment Iterations:**
+   - Configure the model architectures with pre-defined and adjusted classifier heads to alight with our experimental requirements.
    - Instantiate training models.
    - Define loss functions and optimizers.
    - Train the models.
